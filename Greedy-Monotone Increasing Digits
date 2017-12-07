@@ -1,0 +1,44 @@
+class Solution { 
+public:
+    int monotoneIncreasingDigits(int N) {
+        vector<int> v;
+        int x=N;
+        while(N>0)
+        {
+            v.push_back(N%10);
+            N=N/10;
+        }
+        reverse(v.begin(),v.end());
+        int n=v.size();
+        
+        int i=0;
+        while( i<n-1 && v[i+1]>=v[i] )
+            {
+                i++;
+            }
+        if(i==n-1)
+        {
+            return x;
+        }
+        
+        else
+        {
+            x=0;
+            while(v[i-1]==v[i])
+            {
+                i--;
+            }
+            v[i++]--;
+            while(i<n)
+            {
+                v[i]=9;
+                i++;
+            }
+        }
+        for(int i=0;i<n;i++)
+        {
+            x=x*10+v[i];
+        }
+        return x;
+    }
+};
